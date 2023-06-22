@@ -68,6 +68,7 @@ Store data in SQLite or MongoDB and Integrate Flask with it to retreive data
 --------------------------------------------------------------------------------------
 Hypothesis 2:
 - Find heatmap that shows tourist traffic in 2020 and 2021 
+https://www.acaps.org/covid-19-government-measures-dataset
 
 Hypothesis 3:
 Find heatmap for population density 
