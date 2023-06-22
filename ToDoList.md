@@ -66,12 +66,17 @@ Store data in SQLite or MongoDB and Integrate Flask with it to retreive data
 --------------------------------------------------------------------------------------
                         PICK WHAT YOU WILL DO TODAY (06/21)
 --------------------------------------------------------------------------------------
+Hypothesis 1:
+Add COVID infection and hospitalization/fatality per 100000 to line graph for each  country, make vaccination numbers normalized (Kirill)
+
+
 Hypothesis 2:
 - Find heatmap that shows tourist traffic in 2020 and 2021 
 https://www.acaps.org/covid-19-government-measures-dataset
 
-Hypothesis 3:
-Find heatmap for population density 
+Plot countries as individual geometric shapes (that we can color) on the world map (Blake)
+
+Hypothesis 3: (Madi)
 
 Hypothesis 4:
 - Look at link Kirill Sent and divide lockdown measures in numeric way (example: 1-5)
@@ -79,6 +84,20 @@ Hypothesis 4:
 
 
 
+
+
+--------------------------------------------------------------------------------------
+                                Resources
+--------------------------------------------------------------------------------------
+
+
+https://datahub.io/core/geo-countries#data
+
+https://data.worldbank.org/indicator/ST.INT.ARVL?end=2020&start=2020&view=map&year=2020
+
+https://www.unwto.org/tourism-data/unwto-tourism-recovery-tracker
+
+https://ourworldindata.org/grapher/population-density
 
 
 
