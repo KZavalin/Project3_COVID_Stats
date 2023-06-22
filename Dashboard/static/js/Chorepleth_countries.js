@@ -48,6 +48,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
 }).addTo(map);
 
+// For population density as of 2010
+L.esri.tiledMapLayer({
+  url: 'https://tiles.arcgis.com/tiles/VAI453sU9tG9rSmh/arcgis/rest/services/Population_Density_base_tiles/MapServer'
+}).addTo(map);
+
 // Define color scale for the Chorepleth map
 var colorScale = chroma.scale('YlOrRd').domain([0, 250000000]);
 
