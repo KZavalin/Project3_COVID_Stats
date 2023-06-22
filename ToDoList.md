@@ -19,19 +19,19 @@ To-Do (June 16-19)
 
 
 --------------------------------------------------------------------------------------
+                                Project Information  
+--------------------------------------------------------------------------------------
 
-Project Information:
+
+DATA
 
 Scrape from:
 https://covid19.who.int/data
-
 https://www.worldometers.info/coronavirus/
-
 
 
 CSV files from:
 https://covid19.who.int/data
-
 
 
 API from:
@@ -39,21 +39,45 @@ https://covid-api.com/api
 who api
 
 
+SQLite:
+https://www.unwto.org/tourism-data/international-tourism-and-covid-19
+
+MongoDB:
+
+
+--------------------------------------------------------------------------------------
+                                   PROJECT- WE NEED TO DO
 --------------------------------------------------------------------------------------
 
+Create Python FLASK powered API (interact with web API) 
 
-Code to import csv file to SQLite:
-import pandas as pd
-from sqlalchemy import create_engine
-# Export PostgreSQL Data with pgAdmin
-# Make sure to export the PostgreSQL data using pgAdmin and save it as a backup file.
-# Importing PostgreSQL Data into SQLite
-# Create an SQLite engine
-engine_sqlite = create_engine('sqlite:///your_database.sqlite')
-# Read the PostgreSQL backup file into a pandas DataFrame
-df = pd.read_csv('path/to/your/postgresql/backup/file.csv')
-# Write the DataFrame to SQLite
-df.to_sql('your_table', engine_sqlite, if_exists='replace', index=False)
+Create HTML/CSS design user interface
+
+Use JS to add interactivity to web app
+
+D3
+
+other library - HighCharts, Charts.js
+
+Store data in SQLite or MongoDB and Integrate Flask with it to retreive data
+
+
+
+--------------------------------------------------------------------------------------
+                        PICK WHAT YOU WILL DO TODAY (06/21)
+--------------------------------------------------------------------------------------
+Hypothesis 2:
+- Find heatmap that shows tourist traffic in 2020 and 2021 
+
+Hypothesis 3:
+Find heatmap for population density 
+
+Hypothesis 4:
+- Look at link Kirill Sent and divide lockdown measures in numeric way (example: 1-5)
+
+
+
+
 
 
 
