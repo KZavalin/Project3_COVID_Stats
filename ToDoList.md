@@ -76,8 +76,7 @@ https://www.acaps.org/covid-19-government-measures-dataset
 
 Plot countries as individual geometric shapes (that we can color) on the world map (Blake)
 
-Hypothesis 3:
-Find heatmap for population density 
+Hypothesis 3: (Madi)
 
 Hypothesis 4:
 - Look at link Kirill Sent and divide lockdown measures in numeric way (example: 1-5)
@@ -85,6 +84,20 @@ Hypothesis 4:
 
 
 
+
+
+--------------------------------------------------------------------------------------
+                                Resources
+--------------------------------------------------------------------------------------
+
+
+https://datahub.io/core/geo-countries#data
+
+https://data.worldbank.org/indicator/ST.INT.ARVL?end=2020&start=2020&view=map&year=2020
+
+https://www.unwto.org/tourism-data/unwto-tourism-recovery-tracker
+
+https://ourworldindata.org/grapher/population-density
 
 
 
