@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 
 # Define and connect
 app = Flask(__name__)
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/vaccination'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/local.vaccination'
 mongo = PyMongo(app)
 
 # Fetch data from MongoDB
