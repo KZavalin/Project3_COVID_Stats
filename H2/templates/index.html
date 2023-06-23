@@ -1,35 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Tourism During COVID</title>
+    <title>Homepage</title>
+    <style>
+        body {
+            background-color: #1482ad7e;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-  <!-- Our CSS -->
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+        h1 {
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        li {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: white;
+            color: #1482ad7e;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Tourism During COVID19</h1>
-    <input type="text" id="countrySearch" placeholder="Search country">
-    <div>Enter a country/continent/place above to begin.<span id="countrysearch"></span></div>
-    <select id="countrySelect" multiple>
-    <!-- Options for countries will be populated dynamically -->
-    </select>
-    <button id="resetButton">Reset</button>
-
-    <!-- Line Chart -->
-    <div id="lineChart"></div>
-
-    <!-- The div that holds our map -->
-    <div id="map"></div>
-
-    <!-- Plotly.js -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-    <!-- Our JavaScript -->
-    <script type="text/javascript" src="static/js/logic.js"></script>
+    <h1>COVID Tourism Tracker</h1>
+    <ul>
+        <li><a href="{{ url_for('show_map') }}">Map</a></li>
+        <li><a href="{{ url_for('show_dashboard') }}">Tourism Dashboard</a></li>
+    </ul>
 </body>
 </html>
