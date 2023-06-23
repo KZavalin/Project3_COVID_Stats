@@ -2,7 +2,7 @@
 var myGeoJSONPath = 'static/js/mymap.geo.json';
 // Array to store continent data
 var continents = [];
-
+var conts;
 // Function to fetch continent data from CSV
 function fetchContinentsFromCSV(csvFilePath) {
   Papa.parse(csvFilePath, {
@@ -39,27 +39,34 @@ function parseNumericValue(value) {
 function calculateRecoveryRate(totalRecovered, totalCases) {
   return totalCases !== 0 ? (totalRecovered / totalCases) * 100 : 0;
 }
-// Create Leaflet map and set the view
-var map = L.map('map').setView([20, 0], 2);
+
 
 // Add OpenStreetMap tile layer to the map
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-  maxZoom: 18,
-}).addTo(map);
+var geog = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+ attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+ maxZoom: 18,
+});
 
 // For population density as of 2010
-L.esri.tiledMapLayer({
+var pop = L.esri.tiledMapLayer({
   url: 'https://tiles.arcgis.com/tiles/VAI453sU9tG9rSmh/arcgis/rest/services/Population_Density_base_tiles/MapServer'
-}).addTo(map);
+});
+
+var baseMaps = {
+  Geographical: geog,
+  PopulationDensity: pop
+};
+
+
 
 // Define color scale for the Chorepleth map
 var colorScale = chroma.scale('YlOrRd').domain([0, 250000000]);
 
+
 // Function to create the Chorepleth map
 function createChoroplethMap() {
   $.getJSON(myGeoJSONPath, function(geojson) {
-    L.geoJSON(geojson, {
+    conts=L.geoJSON(geojson, {
       style: function(feature) {
         var continent = feature.properties.continent;
         var continentData = continents.find(item => item.continent === continent);
@@ -83,3 +90,18 @@ function createChoroplethMap() {
 fetchContinentsFromCSV('static/js/continent_data.csv');
 
 //dataset results accurate as of 6/15/23 for total cases
+
+var overlayMaps = {
+Continents: conts
+};
+
+
+
+// Create Leaflet map and set the view
+var map = L.map('map', {
+  center: [46.2276, 2.2137],
+  zoom: 1,
+  layers: [geog]
+}).setView([20, 0], 2);
+
+L.control.layers(baseMaps).addTo(map);
