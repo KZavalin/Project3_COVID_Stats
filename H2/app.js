@@ -19,7 +19,7 @@ function init() {
             menu.append("option").text(name).property("value", name);
         });
 
-        barPlot(names);
+        barPlot(names[0]);
     });
 };
 
@@ -33,19 +33,25 @@ function barPlot(country) {
         // filtering so that the id matches that of the country
         let matchedCountries = data.filter((item) => {
             for (let i = 0; i < data.length; i++) {
-                if (data[i].country_name = country)
+                if (data[i].country_name == country)
                     return item.country_name == country;
             }
             
         });
 
-        year_2018 = matchedCountries.year_2018;
-        year_2019 = matchedCountries.year_2019;
-        year_2020 = matchedCountries.year_2020;
+        console.log("matchedCountries:", matchedCountries);
+
+        year_2018 = matchedCountries[0].year_2018;
+        year_2019 = matchedCountries[0].year_2019;
+        year_2020 = matchedCountries[0].year_2020;
+
+        console.log("2018:", year_2018)
+        console.log("2019:", year_2019)
+        console.log("2020:", year_2020)
 
         // slicing the ten values and putting them in descending order
-        let xticks = names
-        let yticks = year_2019
+        let xticks = [2018, 2019, 2020]
+        let yticks = [year_2018, year_2019, year_2020]
 
         let trace1 = {
             x:xticks,
