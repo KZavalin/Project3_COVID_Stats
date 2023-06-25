@@ -6,8 +6,16 @@ app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/local.tourism'
 mongo = PyMongo(app)
 
-# Fetch data from MongoDB
 def fetch_data():
+    data = mongo.db.vac.find()
+    json_data = []
+    for entry in data:
+        entry['_id'] = str(entry['_id']) 
+        json_data.append(entry)
+    return json_data
+
+# Fetch data from MongoDB
+def fetch_tour_data():
     data = mongo.db.tour.find()
     json_data = []
     for entry in data:
@@ -22,13 +30,23 @@ def index():
 # Route for API endpoint to fetch data
 @app.route('/api/tourism')
 def api_tour():
+    data = fetch_tour_data()
+    return jsonify(data)
+
+@app.route('/api/vaccination')
+def api_vaccination():
     data = fetch_data()
     return jsonify(data)
 
-# @app.route('/map')
-# def show_map():
-#     data = fetch_data()
-#     return render_template('Choropleth_Continents.html', data=data)
+@app.route('/map')
+def show_map():
+    data = fetch_data()
+    return render_template('Choropleth_Continents.html', data=data)
+
+@app.route('/tourism-map')
+def show_map():
+    data = fetch_tour_data()
+    return render_template('Choropleth_Continents.html', data=data)
 
 if __name__ == '__main__':
     app.run(debug=False)
