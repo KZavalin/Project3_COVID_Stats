@@ -9,8 +9,7 @@ function init() {
 
     // We need to append the options to the dropdown menu
     d3.json(samples_url).then((data) => {
-        // taking the "names" entry from the dictionary
-        let names = data.names;
+        let names = data.country_name;
 
         names.map((name) => {
             menu.append("option").text(name).property("value", name);
@@ -24,12 +23,11 @@ function init() {
     });
 };
 
-function barPlot(sample) {
-    d3.json(samples_url).then((data) => {
-        let samples = data.samples;
+function barPlot(country) {
+    d3.json(url).then((data) => {
 
-        // filtering so that the id matches that of the sample
-        let matchedSamples = samples.filter((items) => {
+        // filtering so that the id matches that of the country
+        let matchedSamples = data.filter((item) => {
             return item.country_name == name;
         });
 
@@ -39,14 +37,13 @@ function barPlot(sample) {
 
         // slicing the ten values and putting them in descending order
         let xticks = [2018, 2019, 2020]
-        let yticks = year_2018
+        let yticks = [year_2018, year_2019, year_2020]
 
         let trace1 = {
-            x:xticks.reverse(),
-            y:yticks.reverse(),
-            text:labels.reverse(),
+            x:xticks,
+            y:yticks,
             type:"bar",
-            orientation: "h"
+            orientation: "v"
         };
 
         let layout = {
