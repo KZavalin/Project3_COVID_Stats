@@ -11,11 +11,11 @@ function init() {
     d3.json(url).then((data) => {
         let names = data.country_name;
 
-        names.map((name) => {
+        names?.map((name) => {
             menu.append("option").text(name).property("value", name);
         });
 
-        barPlot(names[0]);
+        barPlot(names);
     });
 };
 
@@ -27,9 +27,9 @@ function barPlot(country) {
             return item.country_name == country;
         });
 
-        year_2018 = matchedSamples[0].year_2018;
-        year_2019 = matchedSamples[0].year_2019;
-        year_2020 = matchedSamples[0].year_2020;
+        year_2018 = matchedSamples.year_2018;
+        year_2019 = matchedSamples.year_2019;
+        year_2020 = matchedSamples.year_2020;
 
         // slicing the ten values and putting them in descending order
         let xticks = [2018, 2019, 2020]
