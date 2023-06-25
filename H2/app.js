@@ -1,6 +1,6 @@
-const url = "/H2/static/js/tourism.json"
+const url = "tourism.json"
 
-d3.json(samples_url).then(function(data) {
+d3.json(url).then(function(data) {
     console.log("Data: ", data);
 });
 
@@ -8,18 +8,14 @@ function init() {
     let menu = d3.select("#selDataset"); 
 
     // We need to append the options to the dropdown menu
-    d3.json(samples_url).then((data) => {
+    d3.json(url).then((data) => {
         let names = data.country_name;
 
         names.map((name) => {
             menu.append("option").text(name).property("value", name);
         });
 
-        // logging names[0] gives 940, the first id
-        // In other words, we want the default menu to display the first name in the list
-        demographicInfo(names[0]);
         barPlot(names[0]);
-        bubblePlot(names[0]);
     });
 };
 
@@ -28,7 +24,7 @@ function barPlot(country) {
 
         // filtering so that the id matches that of the country
         let matchedSamples = data.filter((item) => {
-            return item.country_name == name;
+            return item.country_name == country;
         });
 
         year_2018 = matchedSamples[0].year_2018;
@@ -55,3 +51,11 @@ function barPlot(country) {
         Plotly.newPlot("bar", traceData, layout);
     });
 };
+
+function optionChanged(sample) {
+
+    console.log("next value:", sample);
+    barPlot(sample);
+};
+
+init();
