@@ -15,7 +15,7 @@ def fetch_data():
     return json_data
 
 # Fetch data from MongoDB
-def fetch_tour_data():
+def fetch_tourism_data():
     data = mongo.db.tour.find()
     json_data = []
     for entry in data:
@@ -29,7 +29,7 @@ def index():
 
 # Route for API endpoint to fetch data
 @app.route('/api/tourism')
-def api_tour():
+def api_tourism():
     data = fetch_tour_data()
     return jsonify(data)
 
@@ -45,7 +45,7 @@ def show_map():
 
 @app.route('/tourism-map')
 def show_map():
-    data = fetch_tour_data()
+    data = fetch_tourism_data()
     return render_template('Choropleth_Continents.html', data=data)
 
 if __name__ == '__main__':
