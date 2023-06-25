@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>COVID CONTINENTS</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="static/css/map.css">
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <!-- Add the date filter element -->
+  <select id="date-filter">
+    <option value="">All Dates</option>
+    <option value="3/22/20">March 22, 2020</option>
+    <option value="3/23/20">March 23, 2020</option>
+    <!-- Add more date options as needed -->
+  </select>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chroma-js@2.1.0/chroma.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+<script src="static/js/map.js"></script>
+
+</body>
+</html>
+
+<!--sourced from https://github.com/CSSEGISandData/COVID-19/tree/master/archived_data/archived_time_series/>
