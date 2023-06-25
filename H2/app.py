@@ -23,28 +23,6 @@ def fetch_tourism_data():
         json_data.append(entry)
     return json_data
 
-def barPlot(sample) {
-    xticks = 
-    yticks = 
-    labels = 
-
-    trace1 = {
-        x:xticks.reverse(),
-        y:yticks.reverse(),
-        text:labels.reverse(),
-        type:"bar",
-        orientation: "h"
-    }
-
-    layout = {
-        title: "Top Ten OTUs"
-    }
-
-    traceData = [trace1]
-
-    Plotly.newPlot("bar", traceData, layout);
-};
-
 # Routes
 @app.route('/')
 def index():
