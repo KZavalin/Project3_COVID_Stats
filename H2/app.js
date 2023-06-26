@@ -8,7 +8,7 @@ function init() {
     d3.json(url).then((data) => {
         // filtering out countries that lack data
         let filteredData = data.filter(entry => {
-            return entry.year_2018 > 0 && entry.year_2019 > 0 && entry.year_2020 > 0;
+            return entry.year_2018 > 0 && entry.year_2019 > 0 && entry.year_2020 > 0 && entry.total_cases_per_million > 0;
         });
 
         // filling an array with the names
@@ -34,7 +34,7 @@ function barPlots(country) {
     d3.json(url).then((data) => {
         // filtering out countries that lack data
         let filteredData = data.filter(entry => {
-            return entry.year_2018 > 0 && entry.year_2019 >0 && entry.year_2020 > 0;
+            return entry.year_2018 > 0 && entry.year_2019 > 0 && entry.year_2020 > 0 && entry.total_cases_per_million > 0;
         });
 
         // filling an array with the names
@@ -94,7 +94,7 @@ function barPlots2(country) {
     d3.json(url).then((data) => {
         // filtering out countries that lack data
         let filteredData = data.filter(entry => {
-            return entry.year_2018 > 0 && entry.year_2019 > 0 && entry.year_2020 > 0;
+            return entry.year_2018 > 0 && entry.year_2019 > 0 && entry.year_2020 > 0 && entry.total_cases_per_million > 0;
         });
 
         let names = []
