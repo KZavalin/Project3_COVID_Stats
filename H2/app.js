@@ -131,7 +131,7 @@ function barPlots(country1, country2) {
 };
 
 // changes the country when the dropdown menu changes for country 1
-function optionChanged(country1, country2) {
+function optionChanged() {
     var country1 = d3.select("#selDataset").node().value;
     var country2 = d3.select("#selDataset2").node().value;
 
