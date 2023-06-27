@@ -23,11 +23,6 @@ function init() {
             menu2.append("option").text(name).property("value", name);
         });
 
-        var selected1 = d3.select("#selDataset").node().value;
-        var selected2 = d3.select("#selDataset").node().value;
-        console.log("menu: ", selected1);
-        console.log("menu2: ", selected2);
-
         // building the plots with the first name in the list
         barPlots(names[0], names[0]);
     });
@@ -35,8 +30,6 @@ function init() {
 
 // plots the tourism and infection rates of country 1 on the left
 function barPlots(country1, country2) {
-    console.log("c1:", country1)
-    console.log("c2:", country2)
 
     d3.json(url).then((data) => {
         // filtering out countries that lack data
@@ -78,7 +71,7 @@ function barPlots(country1, country2) {
 
         // country 1
         let trace1 = {
-            x:[2018, 2019, 2020],
+            x:["2018 tourism", "2019 tourism", "2020 tourism"],
             y:[year_2018, year_2019, year_2020],
             type:"bar",
             name:"Tourism - " + matchedCountries1[0].country_name,
@@ -86,16 +79,17 @@ function barPlots(country1, country2) {
         }; 
         
         let trace2 = {
-            x:[2020],
+            x:["2020 cases"],
             y:[matchedCountries1[0].total_cases_per_million],
             name:"Infections - " + matchedCountries1[0].country_name,
+            yaxis:"y2",
             type:"bar",
             orientation:"v"
         }
 
         // country 2
         let trace3 = {
-            x:[2018, 2019, 2020],
+            x:["2018 tourism", "2019 tourism", "2020 tourism"],
             y:[year_2018_2, year_2019_2, year_2020_2],
             type:"bar",
             name:"Tourism - " + matchedCountries2[0].country_name,
@@ -103,15 +97,31 @@ function barPlots(country1, country2) {
         };
         
         let trace4 = {
-            x:[2020],
+            x:["2020 cases"],
             y:[matchedCountries2[0].total_cases_per_million],
             name:"Infections - " + matchedCountries2[0].country_name,
+            yaxis: "y2",
             type:"bar",
             orientation:"v"
         }
 
         let layout = {
-            title: "Tourism and Infection Rates"
+            title: "Tourism and Infection Rates",
+            yaxis: {
+                title: 'Tourism per Year'
+            },
+            yaxis2: {
+                title: 'Infections per Year',
+                titlefont: {color: 'rgb(148, 103, 189)'},
+                tickfont: {color: 'rgb(148, 103, 189)'},
+                overlaying: 'y',
+                side: 'right',
+            },
+            legend: {
+                x: 2.25,
+                xanchor: 'right',
+                y: 1
+              }
         };
 
         traceData = [trace1, trace2, trace3, trace4]
