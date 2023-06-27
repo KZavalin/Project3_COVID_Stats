@@ -2,7 +2,7 @@ const url = "merged_data.json"
 
 function init() {
     let menu = d3.select("#selDataset");
-    let menu2 = d3.select("#selDataset2")
+    let menu2 = d3.select("#selDataset2");
 
     // Appending the options to the dropdown menu
     d3.json(url).then((data) => {
@@ -23,14 +23,21 @@ function init() {
             menu2.append("option").text(name).property("value", name);
         });
 
+        var selected1 = d3.select("#selDataset").node().value;
+        var selected2 = d3.select("#selDataset").node().value;
+        console.log("menu: ", selected1);
+        console.log("menu2: ", selected2);
+
         // building the plots with the first name in the list
         barPlots(names[0], names[0]);
-        // barPlots2(names[0])
     });
 };
 
 // plots the tourism and infection rates of country 1 on the left
 function barPlots(country1, country2) {
+    console.log("c1:", country1)
+    console.log("c2:", country2)
+
     d3.json(url).then((data) => {
         // filtering out countries that lack data
         let filteredData = data.filter(entry => {
@@ -69,34 +76,36 @@ function barPlots(country1, country2) {
         year_2019_2 = matchedCountries2[0].year_2019;
         year_2020_2 = matchedCountries2[0].year_2020;
 
+        // country 1
         let trace1 = {
             x:[2018, 2019, 2020],
             y:[year_2018, year_2019, year_2020],
             type:"bar",
-            name:"Tourism",
+            name:"Tourism - " + matchedCountries1[0].country_name,
             orientation: "v"
         }; 
         
         let trace2 = {
             x:[2020],
-            y:[matchedCountries[0].total_cases_per_million],
-            name:"Infections",
+            y:[matchedCountries1[0].total_cases_per_million],
+            name:"Infections - " + matchedCountries1[0].country_name,
             type:"bar",
             orientation:"v"
         }
 
+        // country 2
         let trace3 = {
             x:[2018, 2019, 2020],
             y:[year_2018_2, year_2019_2, year_2020_2],
             type:"bar",
-            name:"Tourism 2",
+            name:"Tourism - " + matchedCountries2[0].country_name,
             orientation: "v"
         };
         
         let trace4 = {
             x:[2020],
             y:[matchedCountries2[0].total_cases_per_million],
-            name:"Infections 2",
+            name:"Infections - " + matchedCountries2[0].country_name,
             type:"bar",
             orientation:"v"
         }
@@ -113,9 +122,10 @@ function barPlots(country1, country2) {
 
 // changes the country when the dropdown menu changes for country 1
 function optionChanged(country1, country2) {
+    var country1 = d3.select("#selDataset").node().value;
+    var country2 = d3.select("#selDataset2").node().value;
 
-    console.log("next values:", country1, "and", country2);
-    barPlot(country1, country2);
+    barPlots(country1, country2);
 };
 
 init();
