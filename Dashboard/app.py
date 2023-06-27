@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 
 # Define and connect
 app = Flask(__name__)
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/local.vaccination'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/vaccination'
 mongo = PyMongo(app)
 
 # Fetch data from MongoDB
@@ -34,6 +34,16 @@ def show_dashboard():
 def show_map():
     data = fetch_data()
     return render_template('Choropleth_Continents.html', data=data)
+
+@app.route('/map_country')
+def show_map_country():
+    data = fetch_data()
+    return render_template('vac_only.html', data=data)
+
+@app.route('/tourism')
+def show_tourism():
+    data = fetch_data()
+    return render_template('index1.html', data=data)
 
 if __name__ == '__main__':
     app.run(debug=False)

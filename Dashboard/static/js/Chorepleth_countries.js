@@ -105,3 +105,4 @@ var map = L.map('map', {
 }).setView([20, 0], 2);
 
 L.control.layers(baseMaps).addTo(map);
+//dataset results accurate as of 6/15/23 for total cases
