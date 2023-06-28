@@ -59,7 +59,7 @@ const titleControl = L.control({ position: 'topleft' });
 // Define the content of the title
 titleControl.onAdd = function () {
   const titleDiv = L.DomUtil.create('div', 'map-title');
-  titleDiv.innerHTML = '<h1>COVID-19 Vaccination Rates by Country</h1>';
+  titleDiv.innerHTML = '<h1>COVID-19 Vaccination Rates by Country (Current)</h1>';
   return titleDiv;
 };
 
