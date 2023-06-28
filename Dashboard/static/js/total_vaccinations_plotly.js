@@ -1,115 +1,122 @@
 let data; 
-
+let searchDay;
 // Fetch data from the API endpoint
-fetch('/api/owid_covid_data')
-  .then(response => response.json())
-  .then(jsonData => {
-    data = jsonData.filter(entry => {return entry.total_vaccinations_per_hundred>0});
-    // Extract unique country names from the data
-    let countryNames = [...new Set(data.map(entry => entry.location))];
-    let selectedCountries = [];
+fetch('/api/owid_covid_data').then(response => response.json()).then(jsonData => {
+  data = jsonData.filter(entry => {return entry.total_vaccinations_per_hundred>=0});
+  // Extract unique country names from the data
+  let countryNames = [...new Set(data.map(entry => entry.location))];
+  let selectedCountries = [];
 
-    // Populate the country select options
-    let countrySelectElement = document.getElementById('countrySelect');
-    countryNames.forEach(country => {
-      let option = document.createElement('option');
-      option.value = country;
-      option.textContent = country;
-      countrySelectElement.appendChild(option);
-    });
+  // Populate the country select options
+  let countrySelectElement = document.getElementById('countrySelect');
+  countryNames.forEach(country => {
+    let option = document.createElement('option');
+    option.value = country;
+    option.textContent = country;
+    countrySelectElement.appendChild(option);
+  });
   
 // Function to handle search button click
-    function handleSearch() {
-  // Get the search inputs
-  let searchCountry = document.getElementById('countrySearch').value.toLowerCase();
-  let searchDay = document.getElementById('daySearch').value;
-
-  // Get DOM elements
-  let startMessageElement = document.getElementById('startMessage');
-  let lineChartElement = document.getElementById('lineChart');
-  let searchedDayVaccinationsElement = document.getElementById('searchedDayVaccinations');
+  function handleSearch() {
+    // Get the search inputs
+    let searchCountry = document.getElementById('countrySearch').value.toLowerCase();
+    searchDay = document.getElementById('daySearch').value;
+    console.log(searchDay);
+    if (searchDay){
+      searchDay = new Date(searchDay);
+      searchDay.setDate(searchDay.getDate()+1);
+      searchDay = searchDay.toDateString();
+      console.log(searchDay)
+    };
+    // Get DOM elements
+    let startMessageElement = document.getElementById('startMessage');
+    let lineChartElement = document.getElementById('lineChart');
+    let searchedDayVaccinationsElement = document.getElementById('searchedDayVaccinations');
 
   // Filter the data based on the search inputs and generate yearly vaccination data
-  let filteredData = data.filter(entry => {
-    let entryCountry = entry.location.toLowerCase();
-    let entryDate = entry.date.split('T')[0];
-    if (searchDay) {
-      return entryCountry === searchCountry && entryDate === searchDay;
-    } else {
-      return entryCountry === searchCountry;
-    }
-  });
+    let filteredData = data.filter(entry => {
+      let entryCountry = entry.location.toLowerCase();
+      let entryDate = new Date(entry.date).toDateString();
+      if (searchDay) {
+        
+        //console.log(entryDate);
+        return entryCountry === searchCountry && entryDate === searchDay ;
+      } else {
+        return entryCountry === searchCountry;
+      }
+    });
+    console.log(filteredData);
+    if (filteredData.length > 0) {
+      let years = Array.from({ length: 4 }, (_, i) => 2020 + i);
+      let totalVaccinations = years.map(year => {
+        let yearData = filteredData.filter(entry => {
+          let entryYear = new Date(entry.date).getFullYear();
+          return entryYear === year;
+        });
 
-  if (filteredData.length > 0) {
-    let years = Array.from({ length: 4 }, (_, i) => 2020 + i);
-    let totalVaccinations = years.map(year => {
-      let yearData = filteredData.filter(entry => {
-        let entryYear = new Date(entry.date).getFullYear();
-        return entryYear === year;
+        let yearlyTotal = 0;
+        if (yearData.length > 0) {
+          yearlyTotal = yearData[yearData.length - 1].total_vaccinations_per_hundred;
+        }
+
+        return yearlyTotal;
       });
 
-      let yearlyTotal = 0;
-      if (yearData.length > 0) {
-        yearlyTotal = yearData[yearData.length - 1].total_vaccinations_per_hundred;
+      // Create chart data for Plotly
+      let chartData = [{
+        x: years,
+        y: totalVaccinations,
+        mode: 'lines+markers',
+        name: searchCountry,
+        line: {
+          color: 'rgba(75, 192, 192, 1)',
+          width: 2
+        },
+        marker: {
+          color: 'rgba(75, 192, 192, 1)',
+          size: 6
+        }
+      }];
+
+      let layout = {
+        title: 'Total Vaccinations',
+        xaxis: {
+          title: 'Year',
+          tickmode: 'array',
+          tickvals: [2020, 2021, 2022, 2023]
+        },
+        yaxis: {
+          title: 'Yearly Total Vaccinations Per Hundred',
+          rangemode: 'tozero',
+          tickformat: ',.0f'
+        },
+        width: 800,
+        height: 500,
+        margin: {
+          l: 200,
+          r: 50,
+          t: 50,
+          b: 50
+        }
+      };
+
+      // Create or update the line chart with the chart data
+      Plotly.newPlot('lineChart', chartData, layout);
+      lineChartElement.style.display = 'block';
+
+      // Display the total vaccinations on the specific day
+      if (searchDay && filteredData.length > 0) {
+        let totalVaccinationsOnDay = filteredData[0].total_vaccinations_per_hundred;
+        searchedDayVaccinationsElement.textContent = `Results: ${totalVaccinationsOnDay.toLocaleString()}`;
+        lineChartElement.style.display = 'none';
+      } else {
+        searchedDayVaccinationsElement.textContent = '';
       }
-
-      return yearlyTotal;
-    });
-
-    // Create chart data for Plotly
-    let chartData = [{
-      x: years,
-      y: totalVaccinations,
-      mode: 'lines+markers',
-      name: searchCountry,
-      line: {
-        color: 'rgba(75, 192, 192, 1)',
-        width: 2
-      },
-      marker: {
-        color: 'rgba(75, 192, 192, 1)',
-        size: 6
-      }
-    }];
-
-    let layout = {
-      title: 'Total Vaccinations',
-      xaxis: {
-        title: 'Year',
-        tickmode: 'array',
-        tickvals: [2020, 2021, 2022, 2023]
-      },
-      yaxis: {
-        title: 'Yearly Total Vaccinations Per Hundred',
-        rangemode: 'tozero',
-        tickformat: ',.0f'
-      },
-      width: 800,
-      height: 500,
-      margin: {
-        l: 200,
-        r: 50,
-        t: 50,
-        b: 50
-      }
-    };
-
-    // Create or update the line chart with the chart data
-    Plotly.newPlot('lineChart', chartData, layout);
-    lineChartElement.style.display = 'block';
-
-    // Display the total vaccinations on the specific day
-    if (searchDay && filteredData.length > 0) {
-      let totalVaccinationsOnDay = filteredData[0].total_vaccinations_per_hundred;
-      searchedDayVaccinationsElement.textContent = `Results: ${totalVaccinationsOnDay.toLocaleString()}`;
     } else {
-      searchedDayVaccinationsElement.textContent = '';
-    }
-  } else {
     lineChartElement.style.display = 'none';
     searchedDayVaccinationsElement.textContent = 'No data available for the selected country and day.';
-  }
-}
+    };
+  };
 
     // Add event listener to the search button
     document.getElementById('searchButton').addEventListener('click', handleSearch);
@@ -212,6 +219,9 @@ fetch('/api/owid_covid_data')
           Plotly.newPlot('lineChart', combinedChartData, layout);
           lineChartElement.style.display = 'block';
           searchedDayVaccinationsElement.textContent = '';
+        if (searchDay){lineChartElement.style.display = 'none';
+          searchedDayVaccinationsElement.textContent = 'Clear date to see country comparison on graph.';
+        };
         } else {
           lineChartElement.style.display = 'none';
           searchedDayVaccinationsElement.textContent = 'No data available for the selected countries.';
