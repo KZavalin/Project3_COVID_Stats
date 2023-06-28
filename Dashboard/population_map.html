@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>COVID-19 Cases By Population Density</title>
+  <style>
+    body {
+      background-image: url('https://www.emeraldgrouppublishing.com/sites/default/files/image/covid-cells.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    h1 {
+      color: white;
+      background-color: black;
+    }
+    
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
+  
+  <link rel="stylesheet" type="text/css" href="static/css/hypo3styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <h1>COVID-19 DATA</h1>
+  
+  <div class="buttons">
+    <button id="mapButton" onclick="showMap()">Map</button>
+  </div>
+
+  <div id="map"></div>
+  
+  <div class="toggle-container">
+    <label for="year-toggle" style="color: white"; >Select Year:</label>
+    <select id="year-toggle">
+      <option value="2020">2020</option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+    </select>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="static/js/heatmap_copy_3.js"></script>
+</body>
+</html>
