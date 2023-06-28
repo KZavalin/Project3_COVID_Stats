@@ -1,4 +1,4 @@
-const url = "merged_data.json"
+const url = "static/js/tourism_merged_data.json"
 
 function init() {
     let menu = d3.select("#selDataset");

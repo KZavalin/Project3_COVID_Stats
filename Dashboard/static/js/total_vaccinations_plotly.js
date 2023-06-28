@@ -4,7 +4,7 @@ let data;
 fetch('/api/owid_covid_data')
   .then(response => response.json())
   .then(jsonData => {
-    data = jsonData.filter(entry => {return entry.total_vaccinations>0});
+    data = jsonData.filter(entry => {return entry.total_vaccinations_per_hundred>0});
     // Extract unique country names from the data
     let countryNames = [...new Set(data.map(entry => entry.location))];
     let selectedCountries = [];
@@ -50,7 +50,7 @@ fetch('/api/owid_covid_data')
 
       let yearlyTotal = 0;
       if (yearData.length > 0) {
-        yearlyTotal = yearData[yearData.length - 1].total_vaccinations;
+        yearlyTotal = yearData[yearData.length - 1].total_vaccinations_per_hundred;
       }
 
       return yearlyTotal;
@@ -80,7 +80,7 @@ fetch('/api/owid_covid_data')
         tickvals: [2020, 2021, 2022, 2023]
       },
       yaxis: {
-        title: 'Yearly Total Vaccinations',
+        title: 'Yearly Total Vaccinations Per Hundred',
         rangemode: 'tozero',
         tickformat: ',.0f'
       },
@@ -100,7 +100,7 @@ fetch('/api/owid_covid_data')
 
     // Display the total vaccinations on the specific day
     if (searchDay && filteredData.length > 0) {
-      let totalVaccinationsOnDay = filteredData[0].total_vaccinations;
+      let totalVaccinationsOnDay = filteredData[0].total_vaccinations_per_hundred;
       searchedDayVaccinationsElement.textContent = `Results: ${totalVaccinationsOnDay.toLocaleString()}`;
     } else {
       searchedDayVaccinationsElement.textContent = '';
@@ -164,7 +164,7 @@ fetch('/api/owid_covid_data')
                 }
               });
     
-              return yearData.length > 0 ? yearData[yearData.length - 1].total_vaccinations : 0;
+              return yearData.length > 0 ? yearData[yearData.length - 1].total_vaccinations_per_hundred : 0;
             });
             return {
               x: years,

@@ -45,10 +45,10 @@ def show_map_country():
     data = fetch_data_owid()
     return render_template('vac_only.html', data=data)
 
-@app.route('/tourism')
+@app.route('/tourismbargraph')
 def show_tourism():
     data = fetch_data_owid()
-    return render_template('index1.html', data=data)
+    return render_template('tourismbargraph.html', data=data)
 
 if __name__ == '__main__':
     app.run(debug=False)
