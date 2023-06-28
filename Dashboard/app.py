@@ -45,6 +45,11 @@ def show_map_country():
     data = fetch_data_owid()
     return render_template('vac_only.html', data=data)
 
+@app.route('/map_cases')
+def show_map_country():
+    data = fetch_data_owid()
+    return render_template('population_map.html', data=data)
+
 @app.route('/tourismbargraph')
 def show_tourism():
     data = fetch_data_owid()
