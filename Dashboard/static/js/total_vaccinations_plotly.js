@@ -1,11 +1,10 @@
 let data; 
 
 // Fetch data from the API endpoint
-fetch('/api/vaccination')
+fetch('/api/owid_covid_data')
   .then(response => response.json())
   .then(jsonData => {
-    data = jsonData; 
-
+    data = jsonData.filter(entry => {return entry.total_vaccinations>0});
     // Extract unique country names from the data
     let countryNames = [...new Set(data.map(entry => entry.location))];
     let selectedCountries = [];

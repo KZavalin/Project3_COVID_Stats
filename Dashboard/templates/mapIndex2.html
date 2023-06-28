@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Covid Vaccination Visualization</title>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+</head>
+  <h1>Dashboard for COVID cases, deaths, and vaccinations per country/region 2020-2023</h1>
+<body>
+  <!-- Country Search -->
+  <input type="text" id="countrySearch" placeholder="Search country">
+  <button id="searchButton">Search</button>
+  <br>
+  <br>
+  <div>Enter a country/continent/place above to begin. You can then select another country/continent/place for comparison. <span id="countrysearch"></span></div>
+  <select id="countrySelect" multiple>
+    <!-- Options for countries will be populated dynamically -->
+  </select>
+  <button id="compareButton">Compare</button>
+  <button id="resetButton">Reset</button>
+  
+  <!-- Line Chart -->
+  <div id="lineChart"></div>
+  <b1>Plotted data is provided by Our World in Data, available at: https://ourworldindata.org/covid-vaccinations</b1>
+
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- Our JavaScript -->
+  <script type="text/javascript" src="static/js/alldash_plotly.js"></script>
+
+</body>
+
+</html>
