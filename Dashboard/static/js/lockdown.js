@@ -123,7 +123,7 @@ fetch('static/js/acaps.json')
       return 'Invalid Date';
     }
   
-    // Assuming the date format is in milliseconds since Unix epoch
+    // Date format is in milliseconds since Unix epoch
     const formattedDate = new Date(parseInt(date));
     const year = formattedDate.getFullYear();
     const month = formattedDate.getMonth() + 1; 
