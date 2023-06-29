@@ -4,16 +4,37 @@
     <title>Homepage</title>
     <style>
         body {
-            background-color: #1482ad7e;
+            background-color: black;
+            background-image: url('https://x4g7z5e6.stackpathcdn.com/wp-content/uploads/2020/12/COVID-19-2.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            text-align: center;
+
         }
 
         h1 {
             color: white;
             text-align: center;
             padding-top: 50px;
+            background-color: black;
+
+        }
+
+        .buttons {
+            margin-top: 200px;
+        }
+
+        .buttons button {
+            width: 200px;
+            height: 50px;
+            margin: 10px;
+            font-size: 18px;
+            color: black;
+            background-color: rgba(255,255, 255, 0.9);
+            border: none;
+            border-radius: 5px;
         }
 
         ul {
@@ -28,6 +49,7 @@
             display: inline-block;
             margin: 10px;
         }
+       
 
         a {
             text-decoration: none;
@@ -53,6 +75,6 @@
         <li><a href="{{ url_for('show_vaccinationdash') }}">Go to Vaccine Only Dashboard</a></li>
         <li><a href="{{ url_for('show_alldash') }}">Go to COVID Cases, Deaths, Vaccine by Country Dashboard</a></li>
         <li><a href="{{ url_for('show_tourismbargraph') }}">Go to Tourism Comparison</a></li>
-    </ul>
+
 </body>
 </html>
