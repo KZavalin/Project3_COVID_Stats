@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lockdown Measures Bar Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+  <style>
+    #chartContainer {
+      width: 900px;
+      height: 600px;
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+  <select id="countrySelect"></select>
+ 
+  <div id="chartContainer">
+    <canvas id="barChart"></canvas>
+  </div>
+  
+
+  <script src="static/js/lockdown.js"></script>
+</body>
+</html>

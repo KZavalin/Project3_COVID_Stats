@@ -55,5 +55,10 @@ def show_tourismbargraph():
     data = fetch_data_owid()
     return render_template('tourismbargraph.html', data=data)
 
+@app.route('/lockdown')
+def show_lockdown():
+    data = fetch_data_owid()
+    return render_template('lockdown.html', data=data)
+
 if __name__ == '__main__':
     app.run(debug=False)
